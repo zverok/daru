@@ -874,7 +874,7 @@ module Daru
     def reindex! new_index
       values = []
       each_with_index do |val, i|
-        values[new_index[i]] = val if new_index.include?(i)
+        values[new_index.at(i)] = val if new_index.include?(i)
       end
       values.fill(nil, values.size, new_index.size - values.size)
 
