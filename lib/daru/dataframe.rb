@@ -386,8 +386,11 @@ module Daru
     def each_row
       return to_enum(:each_row) unless block_given?
 
-      @index.each do |index|
-        yield access_row(index)
+      proxy = Core::RowProxy.new(self)
+
+      @index.size.times do |i|
+        proxy.current_pos = i
+        yield proxy
       end
 
       self
@@ -709,10 +712,10 @@ module Daru
 
     # Iterates over each row and retains it in a new DataFrame if the block returns
     # true for that row.
-    def filter_rows
+    def filter_rows &block
       return to_enum(:filter_rows) unless block_given?
 
-      keep_rows = @index.map { |index| yield access_row(index) }
+      keep_rows = each_row.map(&block)
 
       where keep_rows
     end

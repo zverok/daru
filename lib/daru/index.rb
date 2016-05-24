@@ -84,6 +84,10 @@ module Daru
       end
     end
 
+    def at(key)
+      @relation_hash.fetch(key)
+    end
+
     def slice *args
       start   = args[0]
       en      = args[1]

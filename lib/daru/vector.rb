@@ -212,6 +212,14 @@ module Daru
       )
     end
 
+    def at(idx)
+      @data[@index.at(idx)]
+    end
+
+    def at_pos(i)
+      @data[i]
+    end
+
     # Just like in Hashes, you can specify the index label of the Daru::Vector
     # and assign an element an that place in the Daru::Vector.
     #
